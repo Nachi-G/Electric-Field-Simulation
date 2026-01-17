@@ -31,7 +31,7 @@ This is an interactive 3D simulation of the electric field from a charged ring o
 
 ### Vectors
 - Yellow Arrows (dE): Individual electric field contributions.
-- Scaling: VERY LARGE for visibility.
+  - VERY LARGE for visibility.
 - Green Arrow (E_net): Net electric field at the observer.
 
 ### Toggles
@@ -54,6 +54,7 @@ This is an interactive 3D simulation of the electric field from a charged ring o
 ### Camera Notes
 - The camera orbits the target by default.
 - The camera can be locked to the observer using "Follow Obs".
+
 
 
 
