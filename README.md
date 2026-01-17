@@ -15,7 +15,9 @@ This is an interactive 3D simulation of the electric field from a charged ring o
 
 ### Step 3: Run the Simulation
 - Copy the command below and run:
+  ```bash
   python electric_field_viz.py
+  ```
 
 ### Physics Orientation
 - Charge Geometry: Vertical ring or disk in the Y–Z plane.
@@ -49,4 +51,5 @@ This is an interactive 3D simulation of the electric field from a charged ring o
 ### Camera Notes
 - The camera orbits the target by default.
 - The camera can be locked to the observer using "Follow Obs".
+
 
