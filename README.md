@@ -2,6 +2,9 @@
 
 This is an interactive 3D simulation of the electric field from a charged ring or disk, emphasizing symmetry and vector cancellation.
 
+<img width="430" height="401" alt="image" src="https://github.com/user-attachments/assets/30d95f18-9b7e-43b5-a14c-c25194e18194" />
+
+
 ## How to Run
 
 ### Step 1: Install Python
@@ -51,5 +54,6 @@ This is an interactive 3D simulation of the electric field from a charged ring o
 ### Camera Notes
 - The camera orbits the target by default.
 - The camera can be locked to the observer using "Follow Obs".
+
 
 
