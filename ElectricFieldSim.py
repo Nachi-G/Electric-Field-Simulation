@@ -9,7 +9,7 @@ class ElectricFieldViz:
         self.fig = plt.figure(figsize=(12, 8), facecolor='black')
         self.ax = self.fig.add_subplot(111, projection='3d')
         self.ax.set_facecolor('black')
-        plt.subplots_adjust(left=0.25, bottom=0.25)
+        plt.subplots_adjust(left=0.05, bottom=0.15, right=0.95, top=0.95)
         
         # Initial Physics Parameters
         self.x0 = 2.0  # Observer starts on X axis
@@ -59,7 +59,7 @@ class ElectricFieldViz:
         ax_Q = plt.axes([0.25, 0.05, 0.65, 0.03], facecolor=slider_bg)
         ax_N = plt.axes([0.05, 0.25, 0.02, 0.63], facecolor=slider_bg)
         
-        self.slider_x = Slider(ax_x, 'X Position', -5.0, 5.0, valinit=self.x0, color='gray')
+        self.slider_x = Slider(ax_x, 'X Position', -10.0, 10.0, valinit=self.x0, color='gray')
         self.slider_R = Slider(ax_R, 'Radius R', 0.5, 3.0, valinit=self.R0, color='gray')
         self.slider_Q = Slider(ax_Q, 'Charge Q', -5.0, 5.0, valinit=self.Q0, color='gray')
         self.slider_N = Slider(ax_N, 'Count N', 4, 100, valinit=self.N0, valstep=1, orientation='vertical', color='gray')
@@ -160,11 +160,25 @@ class ElectricFieldViz:
         t = self.target
         d = self.dist
         
-        # Enforce "infinite space" vibe by tight clipping around target
-        self.ax.set_xlim(t[0] - d, t[0] + d)
-        self.ax.set_ylim(t[1] - d, t[1] + d)
-        self.ax.set_zlim(t[2] - d, t[2] + d)
+        # Enforce "infinite space" vibe by dynamic clipping
+        # We ensure the observer (target or self.slider_x.val) is always within bounds
+        x_obs = self.slider_x.val
+        
+        # Determine center for the viewport
+        # If following observer, center on them. Otherwise, center on target.
+        cx = x_obs if self.follow_observer else t[0]
+        cy, cz = t[1], t[2]
+
+        self.ax.set_xlim(cx - d, cx + d)
+        self.ax.set_ylim(cy - d, cy + d)
+        self.ax.set_zlim(cz - d, cz + d)
         self.ax.set_box_aspect([1, 1, 1])
+        
+        # Transparent panes for "infinite" feel
+        self.ax.xaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+        self.ax.yaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+        self.ax.zaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+        
         self.fig.canvas.draw_idle()
 
     def generate_charge_distribution(self, N, R):
@@ -291,3 +305,4 @@ class ElectricFieldViz:
 if __name__ == "__main__":
     app = ElectricFieldViz()
     plt.show()
+
